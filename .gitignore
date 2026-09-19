@@ -1,0 +1,28 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+
+# next
+/.next/
+/out/
+
+# env (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# testing / typescript
+/coverage
+*.tsbuildinfo
+
+# debug
+npm-debug.log*
+.pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# os / ide
+.DS_Store
+.vercel
