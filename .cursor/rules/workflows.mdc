@@ -1,0 +1,72 @@
+---
+alwaysApply: true
+---
+
+---
+
+description: Rules for workflow and state-machine implementation
+alwaysApply: true
+
+---
+
+# Workflow Rules
+
+Business workflows must use explicit persisted states.
+
+Do not use scattered booleans to represent workflow state when a state machine is more appropriate.
+
+Initial workflow states include:
+
+NEW
+QUALIFYING
+QUALIFIED
+AVAILABILITY_CHECK
+SLOT_OFFERED
+BOOKING_PENDING
+BOOKED
+CONFIRMED
+JOB_PENDING
+JOB_COMPLETED
+FOLLOW_UP
+CLOSED
+
+Exception states include:
+
+WAITING_FOR_CUSTOMER
+WAITING_FOR_CONTRACTOR
+WAITING_FOR_HUMAN
+OUTSIDE_SERVICE_AREA
+NO_AVAILABILITY
+EMERGENCY
+UNKNOWN_REQUEST
+INTEGRATION_FAILURE
+BOOKING_FAILED
+CUSTOMER_DECLINED
+
+Only explicitly permitted state transitions may occur.
+
+Never allow arbitrary state transitions from AI-generated text.
+
+Every important transition should produce an auditable workflow event.
+
+Workflow state must be persisted.
+
+Do not rely on in-memory state for long-running processes.
+
+External operations must not automatically imply successful workflow transitions.
+
+For example:
+
+Checking calendar availability does not mean a booking exists.
+
+A booking becomes BOOKED only after the booking operation has been successfully confirmed.
+
+If an external operation fails, preserve the workflow state and record the failure.
+
+Handle duplicate events and webhook deliveries safely.
+
+Use idempotency for mutating operations where appropriate.
+
+Never silently discard workflow failures.
+
+Every workflow should have a clear terminal state or human escalation path.

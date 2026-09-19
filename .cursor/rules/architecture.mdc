@@ -1,0 +1,57 @@
+---
+alwaysApply: true
+---
+
+---
+
+description: Core architecture rules for AI Job Operator
+alwaysApply: true
+
+---
+
+# Architecture Rules
+
+The application must separate:
+
+- AI reasoning
+- business rules
+- workflow/state management
+- tool execution
+- external integrations
+- database persistence
+- user interface
+- audit logging
+
+AI reasoning must never directly manipulate the database or external APIs.
+
+External systems must be accessed through application services or provider adapters.
+
+Prefer interfaces for external providers.
+
+Examples:
+
+- CalendarProvider
+- CRMProvider
+- MessagingProvider
+- TelephonyProvider
+
+The core workflow must not depend directly on Twilio, Google Calendar or HubSpot implementation details.
+
+The database is the application's source of truth for business workflow state.
+
+External systems are integrations, not the source of truth for workflow state.
+
+Do not introduce unnecessary dependencies.
+
+Do not create premature abstractions.
+
+Prefer simple, explicit TypeScript code.
+
+Do not perform large architectural rewrites unless explicitly requested.
+
+Before introducing a major dependency or architectural change, explain:
+
+1. why it is needed
+2. alternatives considered
+3. impact on the existing architecture
+4. operational implications

@@ -1,0 +1,74 @@
+---
+alwaysApply: true
+---
+
+---
+
+description: Rules for AI reasoning, tool calling and agent behaviour
+alwaysApply: true
+
+---
+
+# AI Agent Rules
+
+The LLM is a reasoning component, not the application's source of truth.
+
+The LLM must never directly:
+
+- access the database
+- execute SQL
+- call arbitrary HTTP endpoints
+- access Twilio
+- access Google Calendar
+- access HubSpot
+- modify production infrastructure
+- access secrets
+
+The LLM may only interact with the application through explicitly defined typed tools.
+
+Tools must validate:
+
+- input
+- authorization
+- tenant/business ownership
+- relevant business rules
+
+Tools must log important actions and return structured results.
+
+The AI must never claim that an external action succeeded unless the application confirms success.
+
+The AI must never invent:
+
+- appointment availability
+- prices
+- discounts
+- customer information
+- job status
+- booking confirmations
+- CRM updates
+
+Business rules must exist in application code rather than only inside prompts.
+
+Use structured outputs for important AI decisions.
+
+Validate AI outputs before allowing them to affect workflow state.
+
+AI uncertainty should result in clarification or human escalation rather than guessing.
+
+AI prompts should remain separate from workflow logic.
+
+Do not place critical authorization or business logic inside prompts.
+
+Test AI-related code using deterministic mocked outputs where possible.
+
+Important AI test cases include:
+
+- valid enquiry
+- missing information
+- ambiguous enquiry
+- outside service area
+- no availability
+- emergency
+- unsupported request
+- malformed structured output
+- tool failure

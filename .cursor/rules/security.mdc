@@ -1,0 +1,64 @@
+---
+alwaysApply: true
+---
+
+---
+
+description: Security, authorization and tenant isolation rules
+alwaysApply: true
+
+---
+
+# Security Rules
+
+Never commit secrets.
+
+Never hard-code:
+
+- API keys
+- passwords
+- OAuth tokens
+- database credentials
+- Twilio credentials
+- OpenAI API keys
+- HubSpot tokens
+
+Use environment variables.
+
+Maintain `.env.example` containing variable names but never real credentials.
+
+Every tenant-specific operation must be authorized.
+
+Every business-specific database query must be tenant-scoped.
+
+Never trust tenant IDs supplied directly by the client.
+
+Determine the current business/tenant from authenticated context.
+
+Users must only access data belonging to businesses they are authorized to access.
+
+External integrations must use secure credential storage.
+
+Never expose server-side credentials to browser/client code.
+
+Do not log secrets.
+
+Do not log authentication tokens.
+
+Do not include credentials in error messages.
+
+Validate user-controlled input.
+
+Validate tool inputs.
+
+Validate external API responses.
+
+Treat webhooks as untrusted input.
+
+Verify webhook authenticity where the provider supports signature verification.
+
+For sensitive operations, require appropriate authorization before execution.
+
+Security must not be bypassed merely to make a test pass.
+
+When security requirements are ambiguous, prefer the safer behaviour and flag the ambiguity.
